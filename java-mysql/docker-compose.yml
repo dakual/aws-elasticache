@@ -1,0 +1,31 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0.21
+    container_name: mysql
+    hostname: mysql
+    environment:
+      - MYSQL_DATABASE=tutorial
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=username
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3306:3306"
+    networks:
+      - http-network
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+  redis:
+    image: bitnami/redis:latest
+    container_name: redis
+    hostname: redis
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+        - 6379:6379
+    networks:
+        - http-network
+networks:
+  http-network:
+    driver: bridge
