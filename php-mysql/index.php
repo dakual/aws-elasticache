@@ -6,6 +6,7 @@ $mysql_database = "tutorial";
 
 $redis_host = "127.0.0.1";
 $redis_port = 6379;
+$redis_pass = "";
 
 $sql   = "SELECT * FROM planet";
 $mysql = new mysqli($mysql_host, $mysql_username, $mysql_password, $mysql_database);
@@ -16,6 +17,7 @@ if ($mysql->connect_error) {
 $redis = new Redis();
 try {
   $redis->connect($redis_host, $redis_port);
+  //$redis->auth($redis_pass);
 }catch (RedisException $ex) {
   echo "Redis connection error!";
   return false;
