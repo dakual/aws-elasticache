@@ -28,7 +28,7 @@ try {
 if ($redis->exists($sql)) 
 {
   $result = $redis->get($sql);
-  echo "From Cache<br>";
+  echo "Redis Server<br>";
   echo $result;
 } 
 else 
@@ -37,7 +37,7 @@ else
     $result = $query->fetch_all(MYSQLI_ASSOC);
     $result = json_encode($result);
 
-    echo "From Database<br>";
+    echo "MySQL Server:<br>";
     echo $result;
     
     $redis->setex($sql, 10, $result);
